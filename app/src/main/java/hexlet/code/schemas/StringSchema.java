@@ -6,19 +6,9 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class StringSchema implements Schema {
+public class StringSchema extends BaseSchema {
     private int minLength;
     private String contains;
-    private boolean required = false;
-
-    public boolean getRequired() {
-        return this.required;
-    }
-
-    public StringSchema required() {
-        this.setRequired(true);
-        return this;
-    }
 
     public StringSchema minLength(int minLength) {
         this.setMinLength(minLength);
