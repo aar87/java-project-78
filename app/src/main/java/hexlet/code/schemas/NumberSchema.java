@@ -21,8 +21,8 @@ public class NumberSchema extends BaseSchema<Number> {
     }
 
     public NumberSchema range(int from, int to) {
-        int[] range = {from, to};
-        this.setRange(range);
+        int[] rangeValues = {from, to};
+        this.setRange(rangeValues);
         return this;
     }
 
@@ -36,12 +36,12 @@ public class NumberSchema extends BaseSchema<Number> {
             return false;
         }
 
-        if (this.getPositive() && value != null && (int)value <= 0) {
+        if (this.getPositive() && value != null && (int) value <= 0) {
             return false;
         }
 
         if (this.getRange() != null && value != null) {
-            return (int)value >= this.getRange()[0] && (int)value <= this.getRange()[1];
+            return (int) value >= this.getRange()[0] && (int) value <= this.getRange()[1];
         }
 
         return true;

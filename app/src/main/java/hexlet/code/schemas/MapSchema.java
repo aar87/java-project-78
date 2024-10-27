@@ -18,8 +18,8 @@ public class MapSchema extends BaseSchema<Map<String, String>> {
         return this;
     }
 
-    public MapSchema sizeof(int size) {
-        this.setSize(size);
+    public MapSchema sizeof(int sizeValue) {
+        this.setSize(sizeValue);
         return this;
     }
 

@@ -1,5 +1,7 @@
 plugins {
     application
+    jacoco
+    checkstyle
 }
 
 group = "hexlet.code"
@@ -23,6 +25,8 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.jacocoTestReport { reports { xml.required.set(true) } }
 
 application {
     mainClass = "hexlet.code.App"
