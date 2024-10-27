@@ -6,9 +6,14 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class StringSchema extends BaseSchema {
+public class StringSchema extends BaseSchema<String> {
     private int minLength;
     private String contains;
+
+    public StringSchema required() {
+        super.required();
+        return this;
+    }
 
     public StringSchema minLength(int minLength) {
         this.setMinLength(minLength);
@@ -21,11 +26,10 @@ public class StringSchema extends BaseSchema {
     }
 
     @Override
-    public boolean isValid(Object value) {
-        String string = (String) value;
-        int length = string != null ? string.length() : 0;
+    public boolean isValid(String value) {
+        int length = value != null ? value.length() : 0;
 
-        if (this.getRequired() && (string == null || string.isEmpty())) {
+        if (this.getRequired() && (value == null || value.isEmpty())) {
             return false;
         }
 
@@ -34,7 +38,7 @@ public class StringSchema extends BaseSchema {
         }
 
         if (this.getContains() != null && !this.getContains().isEmpty()) {
-            return string != null && string.contains(this.getContains());
+            return value != null && value.contains(this.getContains());
         }
 
         return true;

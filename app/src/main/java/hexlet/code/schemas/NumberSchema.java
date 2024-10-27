@@ -6,16 +6,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class NumberSchema extends BaseSchema {
+public class NumberSchema extends BaseSchema<Number> {
     private boolean positive;
     private int[] range;
 
-    public BaseSchema positive() {
+    public NumberSchema required() {
+        super.required();
+        return this;
+    }
+
+    public NumberSchema positive() {
         this.setPositive(true);
         return this;
     }
 
-    public BaseSchema range(int from, int to) {
+    public NumberSchema range(int from, int to) {
         int[] range = {from, to};
         this.setRange(range);
         return this;
@@ -26,7 +31,7 @@ public class NumberSchema extends BaseSchema {
     }
 
     @Override
-    public boolean isValid(Object value) {
+    public boolean isValid(Number value) {
         if (this.getRequired() && value == null) {
             return false;
         }
