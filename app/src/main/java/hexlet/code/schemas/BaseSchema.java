@@ -11,7 +11,7 @@ public class BaseSchema {
     private boolean required = false;
 
     public boolean isValid(Object value) {
-        return true;
+        return value != null;
     }
 
     public boolean getRequired() {
