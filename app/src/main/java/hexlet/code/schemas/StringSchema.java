@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
     private int minLength;
     private String contains;
 

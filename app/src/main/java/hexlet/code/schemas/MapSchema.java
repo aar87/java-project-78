@@ -9,7 +9,7 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MapSchema extends BaseSchema<Map<String, String>> {
+public final class MapSchema extends BaseSchema<Map<String, String>> {
     private Integer size;
     private Map<String, BaseSchema<String>> keySchemas;
 
