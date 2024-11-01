@@ -22,6 +22,10 @@ public abstract class BaseSchema<T> {
         checks.put(value, predicate);
     }
 
+    /**
+     * Required state config
+     * @return void
+     */
     protected BaseSchema<T> required() {
         checks.put("required", Objects::nonNull);
         return this;
