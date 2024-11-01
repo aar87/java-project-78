@@ -7,40 +7,19 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public final class StringSchema extends BaseSchema<String> {
-    private int minLength;
-    private String contains;
-
+    @Override
     public StringSchema required() {
-        super.required();
+        addCheck("requiredNotEmpty", value -> value != null && !value.isEmpty());
         return this;
     }
 
     public StringSchema minLength(int minLengthValue) {
-        this.setMinLength(minLengthValue);
+        this.addCheck("length", value -> value != null && value.length() >= minLengthValue);
         return this;
     }
 
     public StringSchema contains(String substring) {
-        this.setContains(substring);
+        this.addCheck("contains", value -> value != null && value.contains(substring));
         return this;
-    }
-
-    @Override
-    public boolean isValid(String value) {
-        int length = value != null ? value.length() : 0;
-
-        if (this.getRequired() && (value == null || value.isEmpty())) {
-            return false;
-        }
-
-        if (this.getMinLength() > 0 && length < getMinLength()) {
-            return false;
-        }
-
-        if (this.getContains() != null && !this.getContains().isEmpty()) {
-            return value != null && value.contains(this.getContains());
-        }
-
-        return true;
     }
 }

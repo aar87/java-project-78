@@ -3,30 +3,27 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public abstract class BaseSchema<T> {
-    private boolean required = false;
+    private Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-    /**
-     * @param value
-     * @return boolean
-     */
-    public boolean isValid(T value) {
-        return true;
+    public final boolean isValid(T value) {
+        return checks.values().stream().allMatch(check -> check.test(value));
     }
 
-    public final boolean getRequired() {
-        return this.required;
+    protected final void addCheck(String value, Predicate<T> predicate) {
+        checks.put(value, predicate);
     }
 
-    /**
-     * @return BaseSchema
-     */
-    public BaseSchema<T> required() {
-        this.setRequired(true);
+    protected BaseSchema<T> required() {
+        checks.put("required", Objects::nonNull);
         return this;
     }
 }
