@@ -23,7 +23,7 @@ public abstract class BaseSchema<T> {
     }
 
     /**
-     * Required state config
+     * Required state config.
      * @return void
      */
     protected BaseSchema<T> required() {
